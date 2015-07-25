@@ -1,8 +1,3 @@
-var models = require('../models');
-var bluebird = require('bluebird');
-var express = require('express');
-var bodyParse = require('body-parser');
-var mysql = require('mysql');
 var model = require('../models/index.js');
 
 
@@ -13,12 +8,17 @@ module.exports = {
       // return messages from server
     }, // a function which handles a get request for all messages
     post: function (req, res){
-      console.log("MESSAGES POST");
-
-      model.messages.post(req.body,function(){
-        res.writeHead(200);
-        res.end();
-      })
+      var getID = "SELECT id from Users WHERE Name = '" + req.body.username + "';";
+      // query to get user id
+      model.runQuery(getID, function(results){
+        var userID = results[results.length-1].id;
+        var postMessage = "INSERT INTO Messages (id_Users, Message) VALUES ('" + userID + "', '" + req.body.message + "');";
+        model.messages.post(postMessage, function(){
+          res.writeHead(200);
+          res.end();
+        })
+      });
+        // query submit message
     } // a function which handles posting a message to the database
   },
 

@@ -31,7 +31,7 @@ describe("Persistent Node Chat Server", function() {
     // Post the user to the chat server.
     request({ method: "POST",
               uri: "http://127.0.0.1:3000/classes/users",
-              json: { username: "RYAN" }
+              json: { username: "Valjean" }
     }, function () {
       // Post a message to the node chat server:
       request({ method: "POST",
@@ -55,7 +55,7 @@ describe("Persistent Node Chat Server", function() {
           expect(results.length).to.equal(1);
 
           // TODO: If you don't have a column named text, change this test.
-          expect(results[0].text).to.equal("In mercy's name, three days is all I need.");
+          expect(results[0].Message).to.equal("In mercys name, three days is all I need.");
 
           done();
         });
