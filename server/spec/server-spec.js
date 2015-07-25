@@ -31,14 +31,14 @@ describe("Persistent Node Chat Server", function() {
     // Post the user to the chat server.
     request({ method: "POST",
               uri: "http://127.0.0.1:3000/classes/users",
-              json: { username: "Valjean" }
+              json: { username: "RYAN" }
     }, function () {
       // Post a message to the node chat server:
       request({ method: "POST",
               uri: "http://127.0.0.1:3000/classes/messages",
               json: {
                 username: "Valjean",
-                message: "In mercy's name, three days is all I need.",
+                message: "In mercys name, three days is all I need.",
                 roomname: "Hello"
               }
       }, function () {

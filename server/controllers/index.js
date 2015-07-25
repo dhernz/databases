@@ -12,9 +12,13 @@ module.exports = {
       console.log("MESSAGES GET");
       // return messages from server
     }, // a function which handles a get request for all messages
-    post: function (req, res) {
+    post: function (req, res){
       console.log("MESSAGES POST");
-      //send messages to the server
+
+      model.messages.post(req.body,function(){
+        res.writeHead(200);
+        res.end();
+      })
     } // a function which handles posting a message to the database
   },
 
@@ -25,8 +29,8 @@ module.exports = {
     },
 
     post: function (req, res) { 
-      console.log("USERS POST");
-      model.users.post(req.body.username, function(){
+      var query = "INSERT INTO Users (Name) VALUES ('" + req.body.username + "');";
+      model.users.post(query, function(){
         res.writeHead(200);
         res.end();
       });
