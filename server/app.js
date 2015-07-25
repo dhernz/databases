@@ -1,5 +1,23 @@
 var express = require('express');
 var db = require('./db');
+var mysql = require('mysql');
+
+var conn = mysql.createConnection({
+  host: '127.0.0.1',
+  user: 'root',
+  password:'12345',
+  database: 'chat',
+  port: '3000'
+
+});
+
+conn.connect(function(err){
+  if(err){
+    console.log('Error connecting to Db');
+    return;
+  }
+  console.log('Connection established');
+});
 
 // Middleware
 var morgan = require('morgan');
@@ -29,4 +47,3 @@ if (!module.parent) {
   app.listen(app.get("port"));
   console.log("Listening on", app.get("port"));
 }
-
