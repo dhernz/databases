@@ -3,7 +3,7 @@ var bluebird = require('bluebird');
 var express = require('express');
 var bodyParse = require('body-parser');
 var mysql = require('mysql');
-
+var model = require('../models/index.js');
 
 
 module.exports = {
@@ -21,36 +21,17 @@ module.exports = {
   Users: {
     // Ditto as above
     get: function (req, res) {
-      // console.log("USERS GET");
-      // conn.connect();
-      // var getAddUser = 'SELECT * FROM Users;';
 
-      // conn.query(getAddUser, function (error, results){
-      //   if(error){
-      //     throw error;
-      //   } else {
-      //     console.log(results);
-      //   }
-      // });
-      // conn.end();
     },
 
     post: function (req, res) { 
+      console.log("USERS POST");
+      model.users.post(req.body.username, function(){
+        res.writeHead(200);
+        res.end();
+      });
 
-    //   var username = req.body.username;
-    //   var addUser = "INSERT INTO Users (Name) VALUES ('" + username + "');";
-
-
-
-    //   conn.query(addUser, function (error, results){
-    //     if(error){
-    //       throw error;
-    //     } else {
-    //       console.log(results);
-    //     }
-    //   });
-    //   conn.end();
-    // }
+    }
   },
 
   Rooms: {  
